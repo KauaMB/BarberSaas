@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\BarberSaas.Application\BarberSaas.Application.csproj" />
+    <ProjectReference Include="..\BarberSaas.Infrastructure\BarberSaas.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

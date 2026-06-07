@@ -1,3 +1,6 @@
 <Solution>
-  <Project Path="BarberSaas/BarberSaas.csproj" />
+  <Project Path="BarberSaas.API/BarberSaas.API.csproj" />
+  <Project Path="BarberSaas.Application/BarberSaas.Application.csproj" />
+  <Project Path="BarberSaas.Domain/BarberSaas.Domain.csproj" />
+  <Project Path="BarberSaas.Infrastructure/BarberSaas.Infrastructure.csproj" />
 </Solution>
