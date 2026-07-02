@@ -8,10 +8,12 @@ namespace BarberSaas.Domain.Entities
     {
         public string Name { get; set; }
         public TimeSpan Duration { get; set; }
+        public decimal Price { get; set; }
 
-        public Service(string name, TimeSpan duration) {
+        public Service(string name, TimeSpan duration, decimal price) {
             Name = name;
             Duration = duration;
+            Price = price;
         }
     }
 }
