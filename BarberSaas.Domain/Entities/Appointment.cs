@@ -6,9 +6,11 @@ namespace BarberSaas.Domain.Entities
 {
     internal class Appointment
     {
-        public string ClientName { get; set; }
-        public string BarberName { get; set; }
-        public string ServiceName { get; set; }
-        public DateTime AppointmentDate { get; set; }
+        public Guid Id { get; private set; }
+        public Guid ClientId { get; private set; }
+        public Guid BarberId { get; private set; }
+        public Guid ServiceId { get; private set; }
+        public DateTime AppointmentStartDate { get; private set; }
+        public DateTime AppointmentEndDate { get; private set; }
     }
 }

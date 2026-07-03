@@ -6,11 +6,13 @@ namespace BarberSaas.Domain.Entities
 {
     internal class Service
     {
-        public string Name { get; set; }
-        public TimeSpan Duration { get; set; }
-        public decimal Price { get; set; }
+        public Guid Id { get; private set; }
+        public string Name { get; private set; }
+        public TimeSpan Duration { get; private set; }
+        public decimal Price { get; private set; }
 
         public Service(string name, TimeSpan duration, decimal price) {
+            Id = Guid.NewGuid();
             Name = name;
             Duration = duration;
             Price = price;

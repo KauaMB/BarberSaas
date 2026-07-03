@@ -6,14 +6,16 @@ namespace BarberSaas.Domain.Entities
 {
     internal class Client
     {
-        public string Name { get; set; }
-        public string PhoneNumber { get; set; }
+        public Guid Id { get; private set; }
+        public string Name { get; private set; }
+        public string PhoneNumber { get; private set; }
 
         public Client(string name, string phoneNumber)
         {
+            Id = Guid.NewGuid();
             Name = name;
             PhoneNumber = phoneNumber;
         }
-        
+
     }
 }
