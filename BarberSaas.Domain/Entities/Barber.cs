@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BarberSaas.Domain.Entities
 {
-    internal class Barber
+    public class Barber
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
