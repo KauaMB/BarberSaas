@@ -10,7 +10,7 @@ namespace BarberSaas.Infrastructure.Testing
     {
         private static readonly Guid _barbeiroPaiId = Guid.Parse("11111111-1111-1111-1111-111111111111");
 
-        private static readonly List<Appointment> _bancoDeDadosEmMemoria = new List<Appointment>
+        private static readonly List<Appointment> inMemoryDatabase = new List<Appointment>
         {
             new Appointment(
                 Guid.NewGuid(),
@@ -60,14 +60,23 @@ namespace BarberSaas.Infrastructure.Testing
 
         public Task CreateNewAppointment(Appointment appointment)
         {
-            _bancoDeDadosEmMemoria.Add(appointment);
+            inMemoryDatabase.Add(appointment);
             return Task.CompletedTask;
         }
 
         public Task<List<Appointment>> GetAllAppointments()
         {
-            return Task.FromResult(_bancoDeDadosEmMemoria);
+            return Task.FromResult(inMemoryDatabase);
         }
-    
-        public Task<bool> ScheduleConflictExists()
+
+        public Task<bool> ScheduleConflictExists(Guid barberId, DateTime startDate, DateTime endDate)
+        {
+            var conflictExists = inMemoryDatabase.Any(a =>
+            a.BarberId == barberId && (startDate < a.AppointmentEndDate &&
+            endDate > a.AppointmentStartDate));
+            
+            return Task.FromResult(conflictExists);
+        }
+
+    }
 }
