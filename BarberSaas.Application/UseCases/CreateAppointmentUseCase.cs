@@ -15,5 +15,6 @@ namespace BarberSaas.Application.UseCases
         }
 
 
+
     }
 }
