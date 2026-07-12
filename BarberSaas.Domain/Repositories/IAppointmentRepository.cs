@@ -7,6 +7,10 @@ namespace BarberSaas.Domain.Repositories
 {
     public interface IAppointmentRepository
     {
-        public Task CreateNewAppointment(Appointment appointment);    
+        public Task CreateNewAppointment(Appointment appointment);
+
+        public Task<List<Appointment>> GetAllAppointments();
+
+        public Task<bool> ScheduleConflictExists(Guid barberId, DateTime startDate, DateTime endDate);
     }
 }

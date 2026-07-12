@@ -15,6 +15,11 @@ namespace BarberSaas.Domain.Entities
 
         public Appointment(Guid id, Guid clientId, Guid barberId, Guid serviceId, DateTime appointmentStartDate, DateTime appointmentEndDate)
         {
+            if (appointmentStartDate >= appointmentEndDate)
+            {
+                throw new ArgumentException("Appointment start date must be before the end date.");
+            }
+
             Id = id;
             ClientId = clientId;
             BarberId = barberId;

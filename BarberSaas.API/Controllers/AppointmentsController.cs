@@ -7,5 +7,7 @@ namespace BarberSaas.API.Controllers
     [ApiController]
     public class AppointmentsController : ControllerBase
     {
+        [HttpGet]
+
     }
 }

@@ -58,11 +58,6 @@ namespace BarberSaas.Infrastructure.Testing
             )
         };
 
-        public Task CreateNewAppointment(Appointment appointment)
-        {
-            inMemoryDatabase.Add(appointment);
-            return Task.CompletedTask;
-        }
 
         public Task<List<Appointment>> GetAllAppointments()
         {
@@ -76,6 +71,11 @@ namespace BarberSaas.Infrastructure.Testing
             endDate > a.AppointmentStartDate));
             
             return Task.FromResult(conflictExists);
+        }
+        public Task CreateNewAppointment(Appointment appointment)
+        {
+            inMemoryDatabase.Add(appointment);
+            return Task.CompletedTask;
         }
 
     }
