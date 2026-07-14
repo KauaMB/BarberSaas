@@ -1,3 +1,8 @@
+using BarberSaas.Application;
+using BarberSaas.Application.UseCases;
+using BarberSaas.Domain.Repositories;
+using BarberSaas.Infrastructure.Testing;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +13,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<IAppointmentRepository, CreateFakeAppointment>();
+
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 

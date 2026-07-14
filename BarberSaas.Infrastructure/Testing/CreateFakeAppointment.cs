@@ -6,7 +6,7 @@ using BarberSaas.Domain.Repositories;
 
 namespace BarberSaas.Infrastructure.Testing
 {
-    internal class CreateFakeAppointment : IAppointmentRepository
+    public class CreateFakeAppointment : IAppointmentRepository
     {
         private static readonly Guid _barbeiroPaiId = Guid.Parse("11111111-1111-1111-1111-111111111111");
 

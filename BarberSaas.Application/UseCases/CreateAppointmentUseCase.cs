@@ -7,7 +7,7 @@ using BarberSaas.Domain.Repositories;
 
 namespace BarberSaas.Application.UseCases
 {
-    internal class CreateAppointmentUseCase
+    public class CreateAppointmentUseCase
     {
         private readonly IAppointmentRepository appointmentRepository;
 
@@ -41,7 +41,7 @@ namespace BarberSaas.Application.UseCases
                appointment.EndDate
             );
 
-            appointmentRepository.CreateNewAppointment(newAppointment);
+            await appointmentRepository.CreateNewAppointment(newAppointment);
                 
         }
         
