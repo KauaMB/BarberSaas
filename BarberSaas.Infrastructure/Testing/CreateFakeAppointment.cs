@@ -8,7 +8,7 @@ namespace BarberSaas.Infrastructure.Testing
 {
     public class CreateFakeAppointment : IAppointmentRepository
     {
-        private static readonly Guid _barbeiroPaiId = Guid.Parse("11111111-1111-1111-1111-111111111111");
+        public static readonly Guid _barbeiroPaiId = Guid.Empty;
 
         private static readonly List<Appointment> inMemoryDatabase = new List<Appointment>
         {

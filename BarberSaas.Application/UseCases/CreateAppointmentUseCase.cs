@@ -33,12 +33,12 @@ namespace BarberSaas.Application.UseCases
 
             Appointment newAppointment = new Appointment
             (
-               new Guid(),
-               new Guid(),
-               new Guid(),
-               new Guid(),
-               appointment.StartDate,
-               appointment.EndDate
+                Guid.NewGuid(),
+                Guid.NewGuid(),
+                Guid.Empty,
+                Guid.NewGuid(),
+                appointment.StartDate,
+                appointment.EndDate
             );
 
             await appointmentRepository.CreateNewAppointment(newAppointment);
