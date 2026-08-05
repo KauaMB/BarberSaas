@@ -17,7 +17,8 @@ namespace BarberSaas.Application.UseCases
 
         public async Task<List<Appointment>> ExecuteAsync()
         {
-            return await appointmentRepository.GetAllAppointments();
+            return await appointmentRepository.GetAllAppointmentsAsync
+            ();
         }
     }
 }

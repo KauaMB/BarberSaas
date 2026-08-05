@@ -2,7 +2,6 @@ using BarberSaas.Application;
 using BarberSaas.Application.UseCases;
 using BarberSaas.Domain.Repositories;
 using BarberSaas.Infrastructure;
-using BarberSaas.Infrastructure.Testing;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +13,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddControllers();
-
-builder.Services.AddScoped<IAppointmentRepository, CreateFakeAppointment>();
 
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);

@@ -41,7 +41,7 @@ namespace BarberSaas.Application.UseCases
                 appointment.EndDate
             );
 
-            await appointmentRepository.CreateNewAppointment(newAppointment);
+            await appointmentRepository.CreateNewAppointmentAsync(newAppointment);
                 
         }
         

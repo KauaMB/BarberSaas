@@ -1,4 +1,6 @@
-﻿using BarberSaas.Infrastructure.Data;
+﻿using BarberSaas.Domain.Repositories;
+using BarberSaas.Infrastructure.Data;
+using BarberSaas.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +13,8 @@ namespace BarberSaas.Infrastructure
         {
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IAppointmentRepository, AppointmentRepository>();
 
             return services;
         }
