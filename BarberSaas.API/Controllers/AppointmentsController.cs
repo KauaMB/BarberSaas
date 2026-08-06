@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using BarberSaas.Application.UseCases;
+﻿using BarberSaas.Application.UseCases;
 using BarberSaas.Application.UseCases.DTOs;
+using BarberSaaS.Application.UseCases;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BarberSaas.API.Controllers
 {
@@ -64,6 +65,28 @@ namespace BarberSaas.API.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id, [FromServices] DeleteAppointmentUseCase useCase)
+        {
+            try
+            {
+                await useCase.ExecuteAsync(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+        }
+
+        [HttpDelete("all")]
+        public async Task<IActionResult> DeleteAll([FromServices] DeleteAllAppointmentsUseCase useCase)
+        {
+            await useCase.ExecuteAsync();
+            return NoContent();
+        }
+    
 
     }
 }

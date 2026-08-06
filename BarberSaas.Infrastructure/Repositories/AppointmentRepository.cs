@@ -25,6 +25,23 @@ namespace BarberSaas.Infrastructure.Repositories
             return await _context.Appointments.ToListAsync();
         }
 
+        public async Task<Appointment?> GetByIdAsync(Guid id)
+        {
+            return await _context.Appointments.FindAsync(id);
+        }
+
+        public async Task DeleteAsync(Appointment appointment)
+        {
+            _context.Appointments.Remove(appointment);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAllAsync()
+        {
+            await _context.Appointments.ExecuteDeleteAsync();
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<bool> ScheduleConflictExists(Guid barberId, DateTime startDate, DateTime endDate)
         {
             return await _context.Appointments.AnyAsync(a =>
