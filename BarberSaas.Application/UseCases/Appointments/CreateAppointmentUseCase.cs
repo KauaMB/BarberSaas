@@ -5,7 +5,7 @@ using BarberSaas.Application.UseCases.DTOs;
 using BarberSaas.Domain.Entities;
 using BarberSaas.Domain.Repositories;
 
-namespace BarberSaas.Application.UseCases
+namespace BarberSaas.Application.UseCases.Appointments
 {
     public class CreateAppointmentUseCase
     {

@@ -1,7 +1,7 @@
 ﻿using BarberSaas.Domain.Repositories;
 using System.Threading.Tasks;
 
-namespace BarberSaaS.Application.UseCases
+namespace BarberSaas.Application.UseCases.Appointments
 {
     public class DeleteAllAppointmentsUseCase
     {

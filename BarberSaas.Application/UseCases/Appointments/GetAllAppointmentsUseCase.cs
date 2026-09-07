@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BarberSaas.Application.UseCases
+namespace BarberSaas.Application.UseCases.Appointments
 {
     public class GetAllAppointmentsUseCase
     {

@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace BarberSaaS.Application.UseCases
+namespace BarberSaas.Application.UseCases.Appointments
 {
     public class DeleteAppointmentUseCase
     {

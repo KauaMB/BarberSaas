@@ -1,10 +1,9 @@
-﻿using BarberSaas.Application.UseCases;
-using BarberSaaS.Application.UseCases;
-using BarberSaas.Domain.Repositories;
+﻿using BarberSaas.Domain.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using BarberSaas.Application.UseCases.AppointmentUseCases;
 
 namespace BarberSaas.Application
 {

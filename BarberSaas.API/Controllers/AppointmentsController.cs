@@ -1,6 +1,5 @@
-﻿using BarberSaas.Application.UseCases;
+﻿using BarberSaas.Application.UseCases.AppointmentUseCases;
 using BarberSaas.Application.UseCases.DTOs;
-using BarberSaaS.Application.UseCases;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
