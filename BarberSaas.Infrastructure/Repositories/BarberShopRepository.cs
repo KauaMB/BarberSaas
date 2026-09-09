@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BarberSaas.Infrastructure.Repositories
 {
-    public class BarberShopRepository : IBarbershopRepository
+    public class BarbershopRepository : IBarbershopRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public BarberShopRepository(ApplicationDbContext context)
+        public BarbershopRepository(ApplicationDbContext context)
         {
             _context = context;
         }

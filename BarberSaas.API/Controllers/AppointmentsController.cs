@@ -1,4 +1,4 @@
-﻿using BarberSaas.Application.UseCases.AppointmentUseCases;
+﻿using BarberSaas.Application.UseCases.Appointments;
 using BarberSaas.Application.UseCases.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -46,7 +46,6 @@ namespace BarberSaas.API.Controllers
             }
             catch (Exception ex)
             {
-                // 
                 return StatusCode(500, ex.Message);
             }
         }

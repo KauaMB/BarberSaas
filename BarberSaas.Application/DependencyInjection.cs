@@ -3,7 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using BarberSaas.Application.UseCases.AppointmentUseCases;
+using BarberSaas.Application.UseCases.Appointments;
+using BarberSaas.Application.UseCases.Barbershop;
 
 namespace BarberSaas.Application
 {
@@ -15,6 +16,7 @@ namespace BarberSaas.Application
             services.AddScoped<GetAllAppointmentsUseCase>();
             services.AddScoped<DeleteAppointmentUseCase>();
             services.AddScoped<DeleteAllAppointmentsUseCase>();
+            services.AddScoped<CreateBarbershopUseCase>();
 
             return services;
         }

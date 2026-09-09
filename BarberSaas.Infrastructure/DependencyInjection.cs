@@ -15,6 +15,8 @@ namespace BarberSaas.Infrastructure
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+            services.AddScoped<IBarbershopRepository, BarbershopRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }
