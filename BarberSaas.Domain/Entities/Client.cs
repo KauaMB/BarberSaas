@@ -6,9 +6,8 @@ namespace BarberSaas.Domain.Entities
     {
         public Guid Id { get; private set; }
         public string Name { get; private set; }
-        public string PhoneNumber { get; private set; } // Mantive a sua nomenclatura!
+        public string PhoneNumber { get; private set; } 
 
-        // A chave do SaaS: Esse cliente pertence a qual barbearia?
         public Guid BarbershopId { get; private set; }
 
         public DateTime CreatedAt { get; private set; }

@@ -9,6 +9,7 @@ namespace BarberSaas.Domain.Entities
         public string Document { get; private set; } //owner document (CNPJ or CPF)
         public DateTime CreatedAt { get; private set; }
         public bool IsActive { get; private set; }
+        public Guid BarbershopId { get; private set; }
 
         protected Barbershop() { }
 
@@ -19,6 +20,7 @@ namespace BarberSaas.Domain.Entities
             Document = document;
             CreatedAt = DateTime.UtcNow;
             IsActive = true;
+            BarbershopId = Guid.NewGuid();
         }
 
         public void Deactivate()

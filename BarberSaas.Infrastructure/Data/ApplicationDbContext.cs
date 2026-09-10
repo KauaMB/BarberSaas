@@ -21,10 +21,29 @@ namespace BarberSaas.Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Appointment>().ToTable("Appointments");
-            modelBuilder.Entity<Barbershop>().ToTable("Barbershops");
-            modelBuilder.Entity<User>().ToTable("Users");
-            modelBuilder.Entity<Client>().ToTable("Clients");
+            modelBuilder.Entity<User>()
+                .HasOne<Barbershop>() 
+                .WithMany()           
+                .HasForeignKey(u => u.BarbershopId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Client>()
+                .HasOne<Barbershop>()
+                .WithMany()
+                .HasForeignKey(c => c.BarbershopId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Appointment>()
+                .HasOne<Barbershop>()
+                .WithMany()
+                .HasForeignKey(a => a.BarbershopId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Service>()
+                .HasOne<Barbershop>()
+                .WithMany()
+                .HasForeignKey(s => s.BarbershopId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

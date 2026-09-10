@@ -10,12 +10,14 @@ namespace BarberSaas.Domain.Entities
         public string Name { get; private set; }
         public TimeSpan Duration { get; private set; }
         public decimal Price { get; private set; }
+        public Guid BarbershopId { get; private set; }
 
-        public Service(string name, TimeSpan duration, decimal price) {
+        public Service(string name, TimeSpan duration, decimal price, Guid barbershopId) {
             Id = Guid.NewGuid();
             Name = name;
             Duration = duration;
             Price = price;
+            BarbershopId = barbershopId;
         }
     }
 }
