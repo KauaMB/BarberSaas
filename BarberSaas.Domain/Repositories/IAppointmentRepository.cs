@@ -9,6 +9,8 @@ namespace BarberSaas.Domain.Repositories
     {
         Task CreateNewAppointmentAsync(Appointment appointment);
         Task<List<Appointment>> GetAllAppointmentsAsync();
+        Task<IEnumerable<Appointment>> GetAllAsync(Guid barbershopId);
+        Task<IEnumerable<Appointment>> GetByBarberIdAsync(Guid barberId, Guid barbershopId);
         Task<bool> ScheduleConflictExists(Guid barberId, DateTime startDate, DateTime endDate);
         Task<Appointment?> GetByIdAsync(Guid id);
         Task DeleteAsync(Appointment appointment);

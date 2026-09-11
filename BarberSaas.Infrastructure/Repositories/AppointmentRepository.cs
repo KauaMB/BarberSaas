@@ -25,6 +25,20 @@ namespace BarberSaas.Infrastructure.Repositories
             return await _context.Appointments.ToListAsync();
         }
 
+        public async Task<IEnumerable<Appointment>> GetAllAsync(Guid barbershopId)
+        {
+            return await _context.Appointments
+                .Where(a => a.BarbershopId == barbershopId)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Appointment>> GetByBarberIdAsync(Guid barberId, Guid barbershopId)
+        {
+            return await _context.Appointments
+               .Where(a => a.BarberId == barberId && a.BarbershopId == barbershopId)
+               .ToListAsync();
+        }
+
         public async Task<Appointment?> GetByIdAsync(Guid id)
         {
             return await _context.Appointments.FindAsync(id);
