@@ -11,6 +11,7 @@ namespace BarberSaas.Application.UseCases.DTOs
         DateTime StartDate,
         Guid ClientId,
         Guid ServiceId,
-        Guid BarberId = default
+        Guid BarberId = default,
+        Guid BarbershopId = default
     );
 }

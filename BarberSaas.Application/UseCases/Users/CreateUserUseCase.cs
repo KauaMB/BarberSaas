@@ -38,11 +38,12 @@ namespace BarberSaas.Application.UseCases.Users
             }
 
             var roleEnum = (UserRole)request.Role;
+            string securePassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
             var user = new User(
                 request.Name,
                 request.Email,
-                request.Password,
+                securePassword,
                 roleEnum, 
                 request.BarbershopId
             );
@@ -54,6 +55,5 @@ namespace BarberSaas.Application.UseCases.Users
                 Id = user.Id
             };
         }
-    
     }
 }

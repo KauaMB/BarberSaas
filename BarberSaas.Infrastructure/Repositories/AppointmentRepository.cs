@@ -1,4 +1,8 @@
-﻿using BarberSaas.Domain.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BarberSaas.Domain.Entities;
 using BarberSaas.Domain.Repositories;
 using BarberSaas.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -20,11 +24,6 @@ namespace BarberSaas.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Appointment>> GetAllAppointmentsAsync()
-        {
-            return await _context.Appointments.ToListAsync();
-        }
-
         public async Task<IEnumerable<Appointment>> GetAllAsync(Guid barbershopId)
         {
             return await _context.Appointments
@@ -39,9 +38,10 @@ namespace BarberSaas.Infrastructure.Repositories
                .ToListAsync();
         }
 
-        public async Task<Appointment?> GetByIdAsync(Guid id)
+        public async Task<Appointment?> GetByIdAsync(Guid id, Guid barbershopId)
         {
-            return await _context.Appointments.FindAsync(id);
+            return await _context.Appointments
+                .FirstOrDefaultAsync(a => a.Id == id && a.BarbershopId == barbershopId);
         }
 
         public async Task DeleteAsync(Appointment appointment)
@@ -50,16 +50,18 @@ namespace BarberSaas.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAllAsync()
+        public async Task DeleteAllAsync(Guid barbershopId)
         {
-            await _context.Appointments.ExecuteDeleteAsync();
-            await _context.SaveChangesAsync();
+            await _context.Appointments
+                .Where(a => a.BarbershopId == barbershopId)
+                .ExecuteDeleteAsync();
         }
 
-        public async Task<bool> ScheduleConflictExists(Guid barberId, DateTime startDate, DateTime endDate)
+        public async Task<bool> ScheduleConflictExists(Guid barberId, DateTime startDate, DateTime endDate, Guid barbershopId)
         {
             return await _context.Appointments.AnyAsync(a =>
                 a.BarberId == barberId &&
+                a.BarbershopId == barbershopId &&
                 a.AppointmentStartDate < endDate &&
                 a.AppointmentEndDate > startDate);
         }

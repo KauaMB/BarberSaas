@@ -2,7 +2,7 @@
 using BarberSaas.Domain.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace BarberSaas.Application.UseCases.Appointments
 {
@@ -15,10 +15,9 @@ namespace BarberSaas.Application.UseCases.Appointments
             this.appointmentRepository = appointmentRepository;
         }
 
-        public async Task<List<Appointment>> ExecuteAsync()
+        public async Task<IEnumerable<Appointment>> ExecuteAsync(Guid barbershopId)
         {
-            return await appointmentRepository.GetAllAppointmentsAsync
-            ();
+            return await appointmentRepository.GetAllAsync(barbershopId);
         }
     }
 }

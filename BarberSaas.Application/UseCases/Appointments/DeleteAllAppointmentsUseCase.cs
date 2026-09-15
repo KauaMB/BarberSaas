@@ -1,4 +1,5 @@
 ﻿using BarberSaas.Domain.Repositories;
+using System;
 using System.Threading.Tasks;
 
 namespace BarberSaas.Application.UseCases.Appointments
@@ -12,9 +13,9 @@ namespace BarberSaas.Application.UseCases.Appointments
             _repository = repository;
         }
 
-        public async Task ExecuteAsync()
+        public async Task ExecuteAsync(Guid barbershopId)
         {
-            await _repository.DeleteAllAsync();
+            await _repository.DeleteAllAsync(barbershopId);
         }
     }
 }

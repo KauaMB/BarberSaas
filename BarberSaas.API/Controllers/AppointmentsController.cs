@@ -1,8 +1,9 @@
 ﻿using BarberSaas.Application.UseCases.Appointments;
 using BarberSaas.Application.UseCases.DTOs;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace BarberSaas.API.Controllers
 {
@@ -13,19 +14,10 @@ namespace BarberSaas.API.Controllers
         private readonly CreateAppointmentUseCase _createAppointmentUseCase;
         private readonly GetAllAppointmentsUseCase _getAllAppointmentsUseCase;
 
-
         public AppointmentsController(CreateAppointmentUseCase createAppointmentUseCase, GetAllAppointmentsUseCase getAllAppointmentsUseCase)
         {
-            if (createAppointmentUseCase == null)
-            {
-                throw new ArgumentNullException(nameof(createAppointmentUseCase));
-            }
-            if (getAllAppointmentsUseCase == null)
-            {
-                throw new ArgumentNullException(nameof(getAllAppointmentsUseCase));
-            }
-            _createAppointmentUseCase = createAppointmentUseCase;
-            _getAllAppointmentsUseCase = getAllAppointmentsUseCase;
+            _createAppointmentUseCase = createAppointmentUseCase ?? throw new ArgumentNullException(nameof(createAppointmentUseCase));
+            _getAllAppointmentsUseCase = getAllAppointmentsUseCase ?? throw new ArgumentNullException(nameof(getAllAppointmentsUseCase));
         }
 
         [HttpPost]
@@ -51,11 +43,11 @@ namespace BarberSaas.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAppointments()
+        public async Task<IActionResult> GetAllAppointments([FromHeader(Name = "X-Barbershop-Id")] Guid barbershopId)
         {
             try
             {
-                var appointments = await _getAllAppointmentsUseCase.ExecuteAsync();
+                var appointments = await _getAllAppointmentsUseCase.ExecuteAsync(barbershopId);
                 return Ok(appointments);
             }
             catch (Exception ex)
@@ -65,11 +57,11 @@ namespace BarberSaas.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id, [FromServices] DeleteAppointmentUseCase useCase)
+        public async Task<IActionResult> Delete(Guid id, [FromHeader(Name = "X-Barbershop-Id")] Guid barbershopId, [FromServices] DeleteAppointmentUseCase useCase)
         {
             try
             {
-                await useCase.ExecuteAsync(id);
+                await useCase.ExecuteAsync(id, barbershopId);
                 return NoContent();
             }
             catch (Exception ex)
@@ -79,12 +71,10 @@ namespace BarberSaas.API.Controllers
         }
 
         [HttpDelete("all")]
-        public async Task<IActionResult> DeleteAll([FromServices] DeleteAllAppointmentsUseCase useCase)
+        public async Task<IActionResult> DeleteAll([FromHeader(Name = "X-Barbershop-Id")] Guid barbershopId, [FromServices] DeleteAllAppointmentsUseCase useCase)
         {
-            await useCase.ExecuteAsync();
+            await useCase.ExecuteAsync(barbershopId);
             return NoContent();
         }
-    
-
     }
 }

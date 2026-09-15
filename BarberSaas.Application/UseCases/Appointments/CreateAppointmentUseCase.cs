@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 using BarberSaas.Application.UseCases.DTOs;
 using BarberSaas.Domain.Entities;
 using BarberSaas.Domain.Repositories;
@@ -13,20 +12,14 @@ namespace BarberSaas.Application.UseCases.Appointments
 
         public CreateAppointmentUseCase(IAppointmentRepository appointmentRepository)
         {
-            this.appointmentRepository = appointmentRepository;
-            if (this.appointmentRepository == null) {
-                throw new ArgumentNullException(nameof(appointmentRepository));
-            }
+            this.appointmentRepository = appointmentRepository ?? throw new ArgumentNullException(nameof(appointmentRepository));
         }
 
         public async Task ExecuteAsync(AppointmentDto appointment)
         {
-            if (appointment == null)
-            {
-                throw new ArgumentNullException(nameof(appointment));
-            }
+            if (appointment == null) throw new ArgumentNullException(nameof(appointment));
 
-            if (await appointmentRepository.ScheduleConflictExists(appointment.BarberId, appointment.StartDate, appointment.EndDate))
+            if (await appointmentRepository.ScheduleConflictExists(appointment.BarberId, appointment.StartDate, appointment.EndDate, appointment.BarbershopId))
             {
                 throw new InvalidOperationException("Schedule conflict exists for the barber.");
             }
@@ -39,13 +32,10 @@ namespace BarberSaas.Application.UseCases.Appointments
                 Guid.NewGuid(),
                 appointment.StartDate,
                 appointment.EndDate,
-                Guid.NewGuid()
+                appointment.BarbershopId
             );
 
             await appointmentRepository.CreateNewAppointmentAsync(newAppointment);
-                
         }
-        
-
     }
 }

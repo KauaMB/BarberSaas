@@ -13,13 +13,12 @@ namespace BarberSaas.Application.UseCases.Appointments
             _repository = repository;
         }
 
-        public async Task ExecuteAsync(Guid id)
+        public async Task ExecuteAsync(Guid id, Guid barbershopId)
         {
-            var appointment = await _repository.GetByIdAsync(id);
-
+            var appointment = await _repository.GetByIdAsync(id, barbershopId);
             if (appointment == null)
             {
-                throw new Exception("Appointment not found");
+                throw new Exception("Appointment not found or belongs to another barbershop");
             }
 
             await _repository.DeleteAsync(appointment);
