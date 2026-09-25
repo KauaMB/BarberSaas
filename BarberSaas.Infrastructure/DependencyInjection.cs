@@ -1,4 +1,6 @@
-﻿using BarberSaas.Domain.Repositories;
+﻿using BarberSaas.Application.Interfaces.Auth;
+using BarberSaas.Domain.Repositories;
+using BarberSaas.Infrastructure.Auth;
 using BarberSaas.Infrastructure.Data;
 using BarberSaas.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +19,7 @@ namespace BarberSaas.Infrastructure
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
             services.AddScoped<IBarbershopRepository, BarbershopRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ITokenService, JwtTokenService>();
 
             return services;
         }

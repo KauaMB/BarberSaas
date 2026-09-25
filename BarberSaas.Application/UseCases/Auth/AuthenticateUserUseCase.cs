@@ -1,45 +1,44 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using BarberSaas.Application.Interfaces.Auth;
 using BarberSaas.Application.UseCases.DTOs;
 using BarberSaas.Domain.Repositories;
 using BCrypt.Net;
+using System;
+using System.Threading.Tasks;
 
 namespace BarberSaas.Application.UseCases.Auth
 {
     public class AuthenticateUserUseCase
     {
         private readonly IUserRepository _userRepository;
+        private readonly ITokenService _tokenService;
 
-        public AuthenticateUserUseCase(IUserRepository userRepository)
+        public AuthenticateUserUseCase(IUserRepository userRepository, ITokenService tokenService)
         {
             _userRepository = userRepository;
+            _tokenService = tokenService;
         }
 
         public async Task<LoginResponse> ExecuteAsync(LoginRequest request)
         {
-            // 1. Busca o usuário no banco pelo e-mail
             var user = await _userRepository.GetByEmailAsync(request.Email);
 
-            // Regra de segurança: Sempre retorne a mesma mensagem genérica para e-mail ou senha errados.
-            // Isso evita que um atacante descubra quais e-mails estão cadastrados no seu sistema.
             if (user == null)
             {
                 throw new UnauthorizedAccessException("E-mail ou senha inválidos.");
             }
 
-            // 2. A Mágica: O BCrypt pega a senha limpa, usa o "Sal" do Hash salvo no banco,"
-            // roda o algoritmo e verifica se o resultado é idêntico[cite: 13].
             bool isPasswordValid = BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash);
 
             if (!isPasswordValid)
             {
-                throw new UnauthorizedAccessException("E-mail ou senha inválidos."); // Retorna erro caso falhe[cite: 13]
+                throw new UnauthorizedAccessException("E-mail ou senha inválidos.");
             }
 
-            // 3. Sucesso! A próxima Micro-Task vai substituir esse texto estático pela geração real do JWT.
+            var token = _tokenService.GenerateToken(user);
+
             return new LoginResponse
             {
-                Token = "jwt_token_temporario_aguardando_proxima_task"
+                Token = token
             };
         }
     }
