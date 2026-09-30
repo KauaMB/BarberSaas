@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BarberSaas.Application.DTOs.User
+namespace BarberSaas.Application.UseCases.DTOs.User
 {
     public class CreateUserResponse
     {

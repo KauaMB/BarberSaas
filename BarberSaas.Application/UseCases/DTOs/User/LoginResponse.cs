@@ -1,4 +1,4 @@
-﻿namespace BarberSaas.Application.UseCases.DTOs
+﻿namespace BarberSaas.Application.UseCases.DTOs.User
 {
     public class LoginResponse
     {

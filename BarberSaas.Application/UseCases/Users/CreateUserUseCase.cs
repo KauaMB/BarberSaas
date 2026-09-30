@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using BarberSaas.Application.DTOs.User;
+using BarberSaas.Application.UseCases.DTOs.User;
 using BarberSaas.Domain.Entities;
 using BarberSaas.Domain.Repositories;
 
@@ -11,7 +11,6 @@ namespace BarberSaas.Application.UseCases.Users
         private readonly IUserRepository _userRepository;
         private readonly IBarbershopRepository _barbershopRepository;
 
-        // Injetamos os dois repositórios
         public CreateUserUseCase(IUserRepository userRepository, IBarbershopRepository barbershopRepository)
         {
             _userRepository = userRepository;

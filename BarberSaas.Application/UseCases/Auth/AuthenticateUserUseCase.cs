@@ -1,5 +1,5 @@
 ﻿using BarberSaas.Application.Interfaces.Auth;
-using BarberSaas.Application.UseCases.DTOs;
+using BarberSaas.Application.UseCases.DTOs.User;
 using BarberSaas.Domain.Repositories;
 using BCrypt.Net;
 using System;
