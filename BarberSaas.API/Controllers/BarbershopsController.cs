@@ -2,9 +2,11 @@
 using System.Threading.Tasks;
 using BarberSaas.Application.UseCases.Barbershop;
 using BarberSaas.Application.DTOs.Barbershop;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BarberSaas.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class BarbershopsController : ControllerBase
